@@ -1,2 +1,2 @@
-./0-current_working_directory
+#!/bin/bash
 /root/alx-system_engineering-devops
