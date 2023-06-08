@@ -1,2 +1,2 @@
 #!/bin/bash
-src_dir="./" dest_dir="../" rsync -avu --include='*.html' --exclude='*' "$src_dir" "$dest_dir"
+cp src_dir="./" dest_dir="../" rsync -avu --include='*.html' --exclude='*' "$src_dir" "$dest_dir"
