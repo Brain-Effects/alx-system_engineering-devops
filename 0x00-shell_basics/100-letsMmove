@@ -1,0 +1,2 @@
+#!/bin/bash
+dest_dir="/tmp/u" for file in [A-Z]*; if [[ -f "$file" ]]; mv "$file" "$dest_dir" fi
