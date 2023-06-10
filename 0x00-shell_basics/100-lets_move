@@ -1,2 +1,2 @@
 #!/bin/bash
-dest_dir="/tmp/u" file [A-Z]* [[ -f "$file" ]]  mv "$file" "$dest_dir"
+mv *[A-Z] file /tmp/u
