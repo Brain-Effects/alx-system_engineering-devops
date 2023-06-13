@@ -1,3 +1,2 @@
 #!/bin/bash
-echo "There are $(echo $PATH | tr ':' '\n' | wc -l) directories in the PATH"
-
+echo "There are $(echo $PATH | tr ':' '\n' | grep -c .) directories in the PATH"
