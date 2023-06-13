@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 echo $(( $(printf '%d' "0x$WATER") + $(printf '%d' "0x$STIR") ))
