@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script stops the 4-to_infinity_and_beyond process
-pid=$(ps -ef | grep '4-to_infinity_and_beyond' | grep -v grep | awk '{print $2}')
+pid=$(ps -ef | awk '/4-to_infinity_and_beyond/ && !/awk/ {print $2}')
 if [ -n "$pid" ]; then
   kill "$pid"
 else
