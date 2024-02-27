@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2009
-echo "List of bash processes:"
-ps auxf | grep bash
+ps -ef | grep bash
