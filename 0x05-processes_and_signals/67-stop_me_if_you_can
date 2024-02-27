@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script stops the 4-to_infinity_and_beyond process
+pid=$(ps -ef | grep '7-highlander' | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  kill "$pid"
+else
+  echo "No 7-highlander process found"
+fi
