@@ -1,0 +1,4 @@
+#!/bin/bash
+# This Bash script uses the ps command to display a list of currently running processes
+echo "List of currently running processes:"
+ps auxf
