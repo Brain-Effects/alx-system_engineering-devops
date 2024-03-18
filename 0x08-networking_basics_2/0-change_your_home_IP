@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 # This script configures an Ubuntu server to resolve localhost to 127.0.0.2 and facebook.com to 8.8.8.8
 
-if grep -Fxq "127.0.0.2 localhost" /etc/hosts
-then
-    echo "localhost already resolves to 127.0.0.2"
-else
-    echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
-fi
+# Copy the existing hosts file to a new file
+cp /etc/hosts ~/hosts.new
 
-if grep -Fxq "8.8.8.8 facebook.com" /etc/hosts
-then
-    echo "facebook.com already resolves to 8.8.8.8"
-else
-    echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
-fi
+# Add the new mappings to the new hosts file
+echo "127.0.0.2 localhost" >> ~/hosts.new
+echo "8.8.8.8 facebook.com" >> ~/hosts.new
+
+# Replace the existing hosts file with the new one
+cp -f ~/hosts.new /etc/hosts
