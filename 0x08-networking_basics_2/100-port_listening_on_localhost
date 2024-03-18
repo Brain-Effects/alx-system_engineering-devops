@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script starts a server that listens on port 98 on localhost
+
+# Start a netcat server that listens on port 98
+nc -l 127.0.0.1 98
