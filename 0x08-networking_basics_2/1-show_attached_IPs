@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script displays all active IPv4 IPs on the machine it's executed on.
+
+# Get all the network interfaces
+interfaces=$(ls /sys/class/net | grep -v lo)
+
+# Loop through each interface
+for interface in $interfaces
+do
+  # Get the IP address assigned to the interface
+  ip=$(ip -4 addr show $interface | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+  # If an IP address is assigned to the interface, display it
+  if [[ $ip ]]; then
+    echo $ip
+  fi
+done
