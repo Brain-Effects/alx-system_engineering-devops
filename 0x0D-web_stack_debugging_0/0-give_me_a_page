@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# This script fixes the server by ensuring the required files are present
+# The lines fix the script by ensuring the required files are present
 cp /etc/passwd /tmp/
 echo OK > /tmp/isworking
