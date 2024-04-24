@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script configures the local SSH client
+
+# Ensure the .ssh directory exists
+mkdir -p ~/.ssh
+
+# Write the configuration
+echo "Host *" > ~/.ssh/config
+echo "    IdentityFile ~/.ssh/school" >> ~/.ssh/config
+echo "    PasswordAuthentication no" >> ~/.ssh/config
