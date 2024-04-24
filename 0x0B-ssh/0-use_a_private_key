@@ -1,4 +1,4 @@
 #!/bin/bash
-#This script attempts to connect to the server at IP address 34.227.93.25
-#using the username ubuntu and the private key located at ~/.ssh/school.
+# This script connects to the server using SSH with the provided private
+# key and username
 ssh -i ~/.ssh/school ubuntu@34.227.93.25
