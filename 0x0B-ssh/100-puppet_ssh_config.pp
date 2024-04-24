@@ -1,18 +1,12 @@
-#!/usr/bin/env bash
-# This script configures the SSH client
+# This Puppet manifest configures the global SSH client settings
 
-# Ensure the .ssh directory exists
-mkdir -p ~/.ssh
+# Ensure the /etc/ssh/ssh_config file exists and has the correct permissions
+file { '/etc/ssh/ssh_config':
+  ensure  => file,
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0644',
 
-# Set the permissions for the .ssh directory
-chmod 700 ~/.ssh
-
-# Create or overwrite the config file with the desired configuration
-cat > ~/.ssh/config << EOF
-Host *
-  IdentityFile ~/.ssh/school
-  PasswordAuthentication no
-EOF
-
-# Set the permissions for the config file
-chmod 600 ~/.ssh/config
+  # The content of the file sets the private key to ~/.ssh/school and turns off password authentication
+  content => "Host *\n  IdentityFile ~/.ssh/school\n  PasswordAuthentication no\n",
+}
