@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# This script installs and configures HAProxy to balance traffic between two web servers
+
+# Update and install HAProxy
+sudo apt-get update
+sudo apt-get install -y haproxy
+
+# Configure HAProxy to balance traffic between web-01 and web-02
+cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend http_front
+    bind *:80
+    stats uri /haproxy?stats
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server web-01 18.214.87.164:80 check
+    server web-02 54.83.129.5:80 check
+EOF
+
+# Enable and restart HAProxy
+sudo systemctl enable haproxy
+sudo systemctl restart haproxy

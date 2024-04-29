@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# this script is designed to update the package list, install and configure Nginx to add
+# a custom header, and then restart Nginx to apply the changes
 
 # Update the package list
 sudo apt update
