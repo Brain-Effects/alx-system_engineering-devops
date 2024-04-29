@@ -12,8 +12,7 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 
 # Create a simple HTML page with "Hello World"
-echo 'Hello World' | sudo tee /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Start Nginx service
-sudo service nginx start
-
+sudo service nginx restart
