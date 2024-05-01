@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# This script checks if Nginx is running and listening on port 80. If not, it starts Nginx and configures it to listen on port 80.
+
+# Check if Nginx is installed
+if ! command -v nginx &> /dev/null
+then
+    echo "Nginx is not installed. Installing now..."
+    apt-get update
+    apt-get install -y nginx
+fi
+
+# Check if Nginx is running
+if ! systemctl is-active --quiet nginx
+then
+    echo "Nginx is not running. Starting now..."
+    systemctl start nginx
+fi
+
+# Check if Nginx is listening on port 80
+if ! netstat -tuln | grep ':80 ' &> /dev/null
+then
+    echo "Nginx is not listening on port 80. Configuring now..."
+    sed -i 's/listen  .*/listen 80;/' /etc/nginx/sites-available/default
+    systemctl restart nginx
+fi
+
+echo "Nginx is running and listening on port 80."
