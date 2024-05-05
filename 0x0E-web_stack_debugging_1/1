@@ -1,0 +1,10 @@
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+Nginx is not running. Starting now...
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+./0-nginx_likes_port_80: line 20: netstat: command not found
+Nginx is not listening on port 80. Configuring now...
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+Nginx is running and listening on port 80.
