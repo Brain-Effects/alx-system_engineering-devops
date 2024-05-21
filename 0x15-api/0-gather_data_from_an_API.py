@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This script retrieves information about an employee's TODO list progress
-using a REST API and prints it to the standard output.
+This module interacts with a REST API to retrieve and display the TODO list
+progress of an employee based on their ID.
 """
 
 import json
@@ -9,50 +9,55 @@ import requests
 import sys
 
 
-def get_employee_name(user_id):
-    """Return the name of the employee by user ID."""
-    user_url = f'https://jsonplaceholder.typicode.com/users/{user_id}'
-    user_response = requests.get(user_url)
-    if user_response.status_code == 200:
-        return user_response.json().get('name', 'Unknown Employee')
-    else:
-        return 'Unknown Employee'
+def get_employee_data(employee_id):
+    """Fetch employee's name and TODO list progress using the
+        given employee ID."""
+    name_url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
+    todos_url = ('https://jsonplaceholder.typicode.com/todos?'
+                 f'userId={employee_id}')
 
-
-def get_employee_tasks(user_id):
-    """Return the tasks of the employee by user ID."""
-    todos_url = f'https://jsonplaceholder.typicode.com/todos?userId={user_id}'
+    name_response = requests.get(name_url)
     todos_response = requests.get(todos_url)
-    return todos_response.json()
+
+    if name_response.ok and todos_response.ok:
+        name = name_response.json().get('name')
+        todos = todos_response.json()
+        return name, todos
+    return None, None
 
 
-def print_employee_progress(user_id):
-    """Print the employee's TODO list progress."""
-    name = get_employee_name(user_id)
-    tasks = get_employee_tasks(user_id)
-    if not name or not tasks:
-        print(f'Employee with ID {user_id} not found.')
-        return
+def display_progress(name, todos):
+    """Display the employee's TODO list progress."""
+    total_tasks = len(todos)
+    completed_tasks = sum(task.get('completed', False) for task in todos)
 
-    total_tasks = len(tasks)
-    completed_tasks = [task for task in tasks if task['completed']]
-    completed_count = len(completed_tasks)
-
-    print(f'Employee {name} is done with tasks({completed_count}/'
+    print(f'Employee {name} is done with tasks({completed_tasks}/'
           f'{total_tasks}):')
-    for task in completed_tasks:
-        print(f'\t {task["title"]}')
+    for task in todos:
+        if task.get('completed', False):
+            print(f'\t {task.get("title")}')
+
+
+def main(employee_id):
+    """Main function that processes the TODO list progress for
+        a given employee ID."""
+    name, todos = get_employee_data(employee_id)
+    if name and todos:
+        display_progress(name, todos)
+    else:
+        print(f'Employee with ID {employee_id} not found\
+              or an error occurred.')
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Usage: {} <employee_id>'.format(sys.argv[0]))
+        print('Usage: ./0-gather_data_from_an_API.py <employee_id>')
         sys.exit(1)
 
     try:
-        user_id = int(sys.argv[1])
+        employee_id = int(sys.argv[1])
     except ValueError:
         print('Employee ID must be an integer.')
         sys.exit(1)
 
-    print_employee_progress(user_id)
+    main(employee_id)
