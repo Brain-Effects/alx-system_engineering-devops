@@ -5,8 +5,8 @@ using a REST API and prints it to the standard output.
 """
 
 import json
-import sys
 import requests
+import sys
 
 
 def get_employee_name(user_id):
