@@ -35,8 +35,8 @@ def print_employee_progress(user_id):
     completed_tasks = [task for task in tasks if task['completed']]
     completed_count = len(completed_tasks)
 
-    print(f'Employee {name} is done with tasks({completed_count}/\
-            {total_tasks}):')
+    print(f'Employee {name} is done with tasks({completed_count}/'
+          f'{total_tasks}):')
     for task in completed_tasks:
         print(f'\t {task["title"]}')
 
