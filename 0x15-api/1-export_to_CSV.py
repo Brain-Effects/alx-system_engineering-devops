@@ -27,7 +27,7 @@ def export_employee_data(employee_id):
             todos_data = json.loads(u.read().decode())
 
         # Extract the employee name and ID from the user data
-        employee_name = user_data.get('name')
+        employee_name = user_data.get('username')
         user_id = user_data.get('id')
 
         # Open the CSV file for writing
