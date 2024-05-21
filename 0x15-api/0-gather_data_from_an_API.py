@@ -8,17 +8,20 @@ import json
 import sys
 import requests
 
+
 def get_employee_name(user_id):
     """Return the name of the employee by user ID."""
     user_url = f'https://jsonplaceholder.typicode.com/users/{user_id}'
     user_response = requests.get(user_url)
     return user_response.json().get('name', None)
 
+
 def get_employee_tasks(user_id):
     """Return the tasks of the employee by user ID."""
     todos_url = f'https://jsonplaceholder.typicode.com/todos?userId={user_id}'
     todos_response = requests.get(todos_url)
     return todos_response.json()
+
 
 def print_employee_progress(user_id):
     """Print the employee's TODO list progress."""
@@ -32,9 +35,11 @@ def print_employee_progress(user_id):
     completed_tasks = [task for task in tasks if task['completed']]
     completed_count = len(completed_tasks)
 
-    print(f'Employee {name} is done with tasks({completed_count}/{total_tasks}):')
+    print(f'Employee {name} is done with tasks({completed_count}/\
+            {total_tasks}):')
     for task in completed_tasks:
         print(f'\t {task["title"]}')
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
