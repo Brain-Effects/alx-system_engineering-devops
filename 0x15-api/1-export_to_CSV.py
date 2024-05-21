@@ -42,7 +42,7 @@ def export_employee_data(employee_id):
                 writer.writerow({
                     "USER_ID": user_id,
                     "USERNAME": employee_name,
-                    "TASK_COMPLETED_STATUS": task.get('all'),
+                    "TASK_COMPLETED_STATUS": task.get('completed'),
                     "TASK_TITLE": task.get('title')
                 })
 
