@@ -13,7 +13,10 @@ def get_employee_name(user_id):
     """Return the name of the employee by user ID."""
     user_url = f'https://jsonplaceholder.typicode.com/users/{user_id}'
     user_response = requests.get(user_url)
-    return user_response.json().get('name', None)
+    if user_response.status_code == 200:
+        return user_response.json().get('name', 'Unknown Employee')
+    else:
+        return 'Unknown Employee'
 
 
 def get_employee_tasks(user_id):
