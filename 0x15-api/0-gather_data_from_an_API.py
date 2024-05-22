@@ -7,6 +7,7 @@ import json  # Libraries imported in alphabetical order
 import sys
 from urllib import request
 
+
 def get_employee_data(employee_id):
     """
     Function to get employee data from an API endpoint.
@@ -26,7 +27,8 @@ def get_employee_data(employee_id):
         # Extract the employee name from the user data
         name = user_data.get('name')
 
-        # Calculate the total number of tasks and the number of completed tasks
+        # Calculate the total number of tasks and the number
+        # of completed tasks
         total_tasks = len(todos_data)
         tasks = sum(1 for task in todos_data if task.get('completed'))
 
