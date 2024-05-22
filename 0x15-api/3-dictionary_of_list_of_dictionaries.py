@@ -7,10 +7,11 @@ and exports the data in JSON format.
 import json
 import requests
 
+
 def export_all_employees_todo_progress():
     """
-    Fetches TODO list progress for all employees using a REST API and exports it
-    in JSON format.
+    Fetches TODO list progress for all employees using a REST API and
+    exports it in JSON format.
     """
     users_url = "https://jsonplaceholder.typicode.com/users"
     todos_url = "https://jsonplaceholder.typicode.com/todos"
@@ -31,6 +32,7 @@ def export_all_employees_todo_progress():
 
     with open('todo_all_employees.json', 'w') as file:
         json.dump(user_tasks, file)
+
 
 if __name__ == "__main__":
     export_all_employees_todo_progress()
