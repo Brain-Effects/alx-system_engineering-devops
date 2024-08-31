@@ -19,6 +19,7 @@ def number_of_subscribers(subreddit):
         return data['data']['subscribers']
     else:
         print(f"Error: Received status code {response.status_code}")
+        print(f"Response content: {response.content}")
         return 0
 
 if __name__ == '__main__':
