@@ -15,8 +15,13 @@ def number_of_subscribers(subreddit):
     headers = {'User-Agent': 'Custom User-Agent'}
     try:
         response = requests.get(url, headers=headers, allow_redirects=False)
-        response.raise_for_status()
-        data = response.json()
-        return data.get('data', {}).get('subscribers', 0)
+        if response.status_code == 200:
+            data = response.json()
+            return data.get('data', {}).get('subscribers', 0)
+        elif response.status_code == 404:
+            print("Invalid subreddit")
+            return 0
+        else:
+            return 0
     except requests.RequestException:
         return 0
