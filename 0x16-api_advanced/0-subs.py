@@ -11,18 +11,18 @@ def number_of_subscribers(subreddit):
     given subreddit.
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'Python: subreddit.subscriber.counter: v1.0\
-            (by /u/yourusername)'}
-    
-    try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        print(f"Response status code: {response.status_code}")
-        if response.status_code == 200:
-            data = response.json()
-            print(f"Response JSON data: {data}")
-            return data.get('data', {}).get('subscribers', 0)
-        else:
-            return 0
-    except requests.RequestException as e:
-        print(f"Request failed: {e}")
+    headers = {'User-Agent': 'myAPI/0.0.1'}
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data['data']['subscribers']
+    else:
         return 0
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        print("{:d}".format(number_of_subscribers(sys.argv[1])))
