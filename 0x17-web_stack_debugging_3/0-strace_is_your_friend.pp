@@ -14,9 +14,15 @@ exec { 'apache_configtest':
   notify      => Service['apache2'],
 }
 
+exec { 'restart_apache':
+  command     => '/usr/sbin/systemctl restart apache2',
+  refreshonly => true,
+}
+
 service { 'apache2':
   ensure    => 'running',
   enable    => true,
   subscribe => File['/var/www/html/index.html'],
   require   => Exec['apache_configtest'],
+  require   => Exec['restart_apache2'],
 }
