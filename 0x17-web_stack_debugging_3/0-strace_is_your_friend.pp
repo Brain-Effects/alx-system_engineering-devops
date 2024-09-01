@@ -1,11 +1,11 @@
 # This Puppet manifest fixes the Apache 500 error by ensuring the
 # required directory exists with correct permissions
-file { '/var/www/html':
-  ensure  => 'directory',
+file { '/var/www/html/index.html':
+  ensure  => 'file',
+  content => '<html><body><h1>It works!</h1></body></html>',
   owner   => 'www-data',
   group   => 'www-data',
-  mode    => '0755',
-  recurse => true,
+  mode    => '0644',
 }
 
 exec { 'apache_configtest':
@@ -15,9 +15,8 @@ exec { 'apache_configtest':
 }
 
 service { 'apache2':
-  ensure    => 'running',
-  enable    => true,
-  subscribe => File['/var/www/html'],
-  require   => Exec['apache_configtest'],
+  ensure     => 'running',
+  enable     => true,
+  subscribe  => File['/var/www/html/index.html'],
+  require    => Exec['apache_configtest'],
 }
-
