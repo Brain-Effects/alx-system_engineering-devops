@@ -5,7 +5,7 @@ file { '/var/www/html/index.html':
   content => '<html><body><h1>It works!</h1></body></html>',
   owner   => 'www-data',
   group   => 'www-data',
-  mode    => '0644',
+  mode    => '0755',
 }
 
 exec { 'apache_configtest':
