@@ -24,5 +24,4 @@ service { 'apache2':
   enable    => true,
   subscribe => File['/var/www/html/index.html'],
   require   => Exec['apache_configtest'],
-  require   => Exec['restart_apache2'],
 }
