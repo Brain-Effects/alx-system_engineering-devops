@@ -7,3 +7,17 @@ file { '/var/www/html':
   mode    => '0755',
   recurse => true,
 }
+
+exec { 'apache_configtest':
+  command     => '/usr/sbin/apachectl configtest',
+  refreshonly => true,
+  notify      => Service['apache2'],
+}
+
+service { 'apache2':
+  ensure    => 'running',
+  enable    => true,
+  subscribe => File['/var/www/html'],
+  require   => Exec['apache_configtest'],
+}
+
