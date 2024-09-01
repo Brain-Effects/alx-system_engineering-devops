@@ -15,8 +15,8 @@ exec { 'apache_configtest':
 }
 
 service { 'apache2':
-  ensure     => 'running',
-  enable     => true,
-  subscribe  => File['/var/www/html/index.html'],
-  require    => Exec['apache_configtest'],
+  ensure    => 'running',
+  enable    => true,
+  subscribe => File['/var/www/html/index.html'],
+  require   => Exec['apache_configtest'],
 }
