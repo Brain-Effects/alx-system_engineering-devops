@@ -18,3 +18,9 @@ exec { 'restart_apache':
   command     => '/usr/sbin/systemctl restart apache2',
   refreshonly => true,
 }
+
+service { 'apache2':
+  ensure     => 'running',
+  enable     => true,
+  subscribe  => File['/var/www/html'],
+}
