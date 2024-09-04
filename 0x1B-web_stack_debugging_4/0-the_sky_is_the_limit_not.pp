@@ -6,6 +6,12 @@ class optimize_nginx {
     ensure => installed,
   }
 
+# Ensure Apache is stopped to avoid port conflicts
+  service { 'apache2':
+    ensure => stopped,
+    enable => false,
+  }
+
   # Ensure Nginx service is running and enabled
   service { 'nginx':
     ensure     => running,
@@ -18,6 +24,14 @@ class optimize_nginx {
     ensure  => file,
     content => template('/alx-system_engineering-devops/0x1B-web_stack_debugging_4/optimize_nginx/templates/nginx.conf.erb'),
     notify  => Service['nginx'],
+  }
+
+# Validate Nginx configuration before starting the service
+  exec { 'nginx_config_test':
+    command     => '/usr/sbin/nginx -t',
+    refreshonly => true,
+    subscribe   => File['/etc/nginx/nginx.conf'],
+    notify      => Service['nginx'],
   }
 }
 
