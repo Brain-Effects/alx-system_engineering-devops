@@ -24,7 +24,7 @@ http {
     gzip_disable "msie6";
 
     client_max_body_size 50M;
-    worker_rlimit_nofile 100000
+    worker_rlimit_nofile 100000;
 
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
