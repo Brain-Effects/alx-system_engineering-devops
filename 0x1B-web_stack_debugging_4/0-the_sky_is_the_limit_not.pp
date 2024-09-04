@@ -14,9 +14,9 @@ class optimize_nginx {
 
   # Ensure Nginx service is running and enabled
   service { 'nginx':
-    ensure     => running,
-    enable     => true,
-    subscribe  => File['/etc/nginx/nginx.conf'],
+    ensure    => running,
+    enable    => true,
+    subscribe => File['/etc/nginx/nginx.conf'],
   }
 
   # Optimize Nginx configuration
