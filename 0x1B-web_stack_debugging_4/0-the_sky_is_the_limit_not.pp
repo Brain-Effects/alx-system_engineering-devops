@@ -1,5 +1,8 @@
 # This Puppet manifest optimizes the Nginx configuration to handle high load and reduce failed requests.
 
+# Class: optimize_nginx
+# This class ensures that Nginx is installed, configured, and running optimally.
+# It also stops Apache to avoid port conflicts and validates the Nginx configuration.
 class optimize_nginx {
   # Ensure Nginx is installed
   package { 'nginx':
