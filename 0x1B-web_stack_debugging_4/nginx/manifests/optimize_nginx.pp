@@ -38,3 +38,6 @@ class nginx::optimize_nginx {
     notify      => Service['nginx'],
   }
 }
+
+# Apply the class
+nginx::optimize_nginx
